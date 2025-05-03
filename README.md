@@ -1,5 +1,5 @@
 # 🌊 Titanic Survival Predictor
-An end-to-end machine learning project showcasing data exploration, preprocessing, model training and evaluation using the classic Titanic dataset. I implemented and compared three classifiers—K-Nearest Neighbors, Random Forest and Support Vector Machine—to predict passenger survival.
+An end-to-end machine learning project showcasing data exploration, preprocessing, model training and evaluation using the classic Titanic dataset. I implemented and compared three classifiers : K-Nearest Neighbors, Random Forest and Support Vector Machine, to predict passenger survival.
 
 ## 🚀 Features
 
@@ -21,8 +21,7 @@ An end-to-end machine learning project showcasing data exploration, preprocessin
 ## ⚙️ Installation & Usage
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/your-username/titanic-survival-predictor.git
-   cd titanic-survival-predictor
+   git clone https://github.com/eigsi/titanic-predictor.git
     ```
 2. **Install dependencies**
    ```bash

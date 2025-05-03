@@ -4,7 +4,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from sklearn.datasets import fetch_openml
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.model_selection import train_test_split
 
 output_dir = "plots"
 pd.set_option('display.max_columns', None)

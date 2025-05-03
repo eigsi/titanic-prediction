@@ -1,8 +1,7 @@
-import os
 import pandas as pd
-import seaborn as sns
 from sklearn.svm import SVC
 from matplotlib import pyplot as plt
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -12,7 +11,7 @@ from data_titanic import features_train, target_train, save_plot, features_valid
 
 output_dir = "plots"
 pd.set_option('display.max_columns', None)
-seed = 1
+seed = 44
 
 # ---------------- CROSS VALIDATION FUNCTION ----------------   
 def cross_val(model, name):
@@ -96,3 +95,46 @@ cross_val(knn, "knn")
 cross_val(svc, "svc")
 cross_val(r_forest, "random_forest")
 
+
+# --------------------------- 3) GRID SEARCH CV ----------------------------
+# --------------------------- 3) GRID SEARCH CV ----------------------------
+def OptimizeModel(model, param_grid, kfold, name):
+    grid = GridSearchCV(
+    estimator=model,
+    param_grid=param_grid,
+    scoring="accuracy",
+    cv=kfold,
+    n_jobs=-1,
+    )
+    
+    grid.fit(features_train, target_train)
+
+    best_model = grid.best_estimator_
+    print(f"Best parameters for {name}:", grid.best_params_)
+    print(f"Best accuracy CV for {name}:", best_model)
+    
+    val_score = best_model.score(features_validation, target_validation)
+    print(f"Accuracy of the best {name} model on validation :", val_score)
+    
+# -------- RANDOM FOREST GRID & MODEL ----------
+param_forest = {
+    "n_estimators":    [100, 200],
+    "max_depth":       [4, 6, 8],
+    "min_samples_leaf":[1, 3, 5],
+    "max_features":    ["sqrt", 0.5]
+}
+r_forest_base = RandomForestClassifier()
+
+# -------- SVC GRID ----------
+param_SVC = {
+    "C": [0.1, 1, 10],
+    "gamma": ["scale", "auto", 0.1, 1],
+    "kernel": ["rbf", "poly"],
+}
+
+OptimizeModel(r_forest_base, param_forest, kfold, "random forest")
+OptimizeModel(svc, param_SVC, kfold, "svc")
+
+
+    
+    
